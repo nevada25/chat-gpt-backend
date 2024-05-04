@@ -20,15 +20,15 @@ export class SamAssistantService {
   async userQuestion(questionDto: QuestionDto) {
     const message = await createMessageUseCase(this.openai, {
       question: questionDto.question,
-      threadId: questionDto.threadID
+      threadId: questionDto.threadId
     });
     const run = await createRunUseCase(this.openai, {
-      threadId: questionDto.threadID
+      threadId: questionDto.threadId
     });
-    await CheckCompleteStatusUseCase(this.openai, { runId: run.id, threadId: questionDto.threadID });
+    await CheckCompleteStatusUseCase(this.openai, { runId: run.id, threadId: questionDto.threadId });
 
     return getMessageListUseCase(this.openai, {
-      threadId: questionDto.threadID
+      threadId: questionDto.threadId
     });
   }
 

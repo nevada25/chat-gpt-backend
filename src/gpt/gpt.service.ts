@@ -22,6 +22,7 @@ import {
   TranslateDto,
 } from './dtos';
 import OpenAI from 'openai';
+import { ImageToTextUseCase } from "./use-cases/image-to-text.use-case";
 
 @Injectable()
 export class GptService {
@@ -85,5 +86,8 @@ export class GptService {
 
   async imageVariation({ baseImage }: ImageVariationDto) {
     return generateImageVariationUseCase(this.openai, { baseImage });
+  }
+  async imageToText(imageFile: Express.Multer.File, prompt: string) {
+    return await ImageToTextUseCase(this.openai, { imageFile, prompt });
   }
 }
